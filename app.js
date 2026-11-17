@@ -13,7 +13,7 @@ const preview = location.hash === "#apercu";
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function isOpen(d) { return preview || new Date() >= new Date(YEAR, 11, d); }
 function isToday(d) { const t = new Date(); return t.getFullYear() === YEAR && t.getMonth() === 11 && t.getDate() === d; }
-function title(d) { return d === 24 ? "24 décembre · La grande finale de Noël" : `${d} décembre`; }
+function title(d) { return d === 24 ? "24 décembre · La grande finale de Noël" : d === 2 ? "2 décembre · Spécial anniversaire, ¡Colombia!" : `${d} décembre`; }
 const LETTERS = "ABCD";
 
 if (padTarget) startPad(padTarget); else startTv();
@@ -70,7 +70,7 @@ function startTv() {
     if (!isOpen(d)) return d === 24 ? "finale" : "fermé";
     if (a.length >= n) return `${dayScore(d)} / ${n}`;
     if (a.length > 0) return `en cours ${a.length}/${n}`;
-    return d === 24 ? "24 questions" : "à jouer";
+    return d === 24 ? "24 questions" : d === 2 ? "anniversaire" : "à jouer";
   }
 
   /* ---------- rendu ---------- */
@@ -87,7 +87,7 @@ function startTv() {
       const n = QUIZ[d].length, a = answers[d] || [];
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "day" + (d === 24 ? " big" : "");
+      b.className = "day" + (d === 24 || d === 2 ? " big" : "");
       if (!isOpen(d)) b.classList.add("locked");
       else if (a.length >= n) b.classList.add("done");
       if (isToday(d)) b.classList.add("today");
@@ -194,10 +194,12 @@ function startTv() {
     view = { screen: "end", d };
     const n = QUIZ[d].length, s = dayScore(d), a = answers[d];
     const r = s / n;
-    const msg = r === 1 ? "Sans faute. Plus française que moi."
+    const bday = d === 2 ? " ¡Feliz cumpleaños!" : "";
+    const msg0 = r === 1 ? "Sans faute. Plus française que moi."
       : r >= .6 ? "Belle performance. Les bonbons sont mérités."
       : r >= .4 ? "Pas mal du tout. On fera mieux demain."
       : "Journée difficile. Un bonbon de consolation quand même ?";
+    const msg = d === 2 ? (r >= .6 ? "Normal, tu jouais à domicile." : "Même à domicile, la Colombie réserve des surprises.") + bday : msg0;
     inner.innerHTML = `${topHtml(d)}
       <div class="end">
         <p class="count">Score du jour</p>
@@ -347,7 +349,7 @@ function startPad(target) {
     last = s;
     if (s.screen === "grid") {
       frame(`<h2>Choisis le jour</h2>${status(true, "Connectée à la télé")}
-        <div class="pad-days">${s.days.map(x => `<button type="button" class="day ${x.d === 24 ? "big" : ""} ${x.open ? "" : "locked"} ${x.done ? "done" : ""} ${x.today ? "today" : ""}" data-d="${x.d}" ${x.open ? "" : "disabled"}><span class="n">${x.d}</span><span class="s">${esc(x.label)}</span></button>`).join("")}</div>`);
+        <div class="pad-days">${s.days.map(x => `<button type="button" class="day ${x.d === 24 || x.d === 2 ? "big" : ""} ${x.open ? "" : "locked"} ${x.done ? "done" : ""} ${x.today ? "today" : ""}" data-d="${x.d}" ${x.open ? "" : "disabled"}><span class="n">${x.d}</span><span class="s">${esc(x.label)}</span></button>`).join("")}</div>`);
       app.querySelectorAll(".pad-days .day").forEach(b => b.addEventListener("click", () => sendMsg({ type: "open", d: +b.dataset.d })));
       return;
     }

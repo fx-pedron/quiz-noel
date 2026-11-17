@@ -1,6 +1,6 @@
 # Le grand quiz de l'Avent
 
-Un quiz de culture française pour décembre 2026 : 5 questions par jour du 1er au 23, puis 24 questions sur Noël le 24.
+Un quiz de culture française pour décembre 2026 : 5 questions par jour du 1er au 23 (10 sur la Colombie le 2, jour d'anniversaire), puis 24 questions sur Noël le 24.
 
 - **La télé** ouvre la page : calendrier, questions, explications et score.
 - **Le téléphone** scanne le QR code (bouton « Connecter le téléphone ») et sert de manette : quatre boutons A, B, C, D.
@@ -30,4 +30,4 @@ La page demande à l'iPhone de rester allumé pendant la partie (iOS 16.4 ou plu
 
 - `index.html` : la page et les styles
 - `app.js` : la logique (mode télé et mode manette)
-- `questions.js` : les 139 questions
+- `questions.js` : les 144 questions
