@@ -270,7 +270,7 @@ function startTv() {
     const box = document.getElementById("qr");
     box.innerHTML = "";
     if (!peerId) return;
-    try { new QRCode(box, { text: padUrl(), width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+    try { const sz = Math.max(140, Math.min(220, window.innerHeight - 200)); new QRCode(box, { text: padUrl(), width: sz, height: sz, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
     document.getElementById("qr-url").textContent = padUrl();
   }
   function newId() { return PEER_PREFIX + Math.random().toString(36).slice(2, 8); }
@@ -306,6 +306,15 @@ function startTv() {
   document.getElementById("qr-close").addEventListener("click", () => qrp.classList.remove("open"));
   window.addEventListener("hashchange", () => location.reload());
   setInterval(broadcast, 4000);   // renvoie l'état au cas où un message se serait perdu
+
+  /* ---------- garder l'écran allumé pendant la diffusion ---------- */
+  let wake = null;
+  async function keepAwake() {
+    if (!("wakeLock" in navigator) || document.visibilityState !== "visible" || wake) return;
+    try { wake = await navigator.wakeLock.request("screen"); wake.addEventListener("release", () => { wake = null; }); } catch (e) {}
+  }
+  document.addEventListener("pointerdown", keepAwake);
+  document.addEventListener("visibilitychange", keepAwake);
 
   renderGrid();
   startPeer(getId());

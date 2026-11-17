@@ -11,6 +11,15 @@ Les deux appareils se parlent directement (WebRTC, via [PeerJS](https://peerjs.c
 
 Dans le dépôt GitHub : **Settings → Pages → Build and deployment**, Source : *Deploy from a branch*, branche `main`, dossier `/ (root)`. Le site est alors servi sur `https://fx-pedron.github.io/quiz-noel/`.
 
+## Jouer sur la télé LG depuis l'iPhone
+
+1. Sur l'iPhone, ouvrir l'adresse dans Safari, puis Partager → « Sur l'écran d'accueil » (plein écran, sans barre d'adresse).
+2. Lancer l'appli depuis l'écran d'accueil et tourner le téléphone en paysage.
+3. Centre de contrôle → « Recopie de l'écran » → choisir la télé LG (AirPlay).
+4. Toucher « Connecter le téléphone » : le QR code s'affiche sur la télé, l'autre téléphone le scanne.
+
+La page demande à l'iPhone de rester allumé pendant la partie (iOS 16.4 ou plus récent). Sinon : Réglages → Luminosité et affichage → Verrouillage automatique → Jamais, le temps de jouer.
+
 ## Astuces
 
 - Chaque jour se débloque à sa date (selon l'horloge de la télé).
