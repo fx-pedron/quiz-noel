@@ -22,7 +22,8 @@ if (padTarget) startPad(padTarget); else startTv();
    TÉLÉ
    ====================================================================== */
 function startTv() {
-  const KEY = "quiz-avent-2026";
+  // l'aperçu a sa propre mémoire, pour que les tests ne se mélangent pas avec la vraie partie
+  const KEY = preview ? "quiz-avent-2026-apercu" : "quiz-avent-2026-v2";
   const store = {
     get() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } },
     set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
@@ -232,7 +233,7 @@ function startTv() {
     const base = { type: "state", pts: t.pts };
     if (view.screen === "grid") {
       const days = [];
-      for (let d = 1; d <= 24; d++) days.push({ d, open: isOpen(d), today: isToday(d), label: dayLabel(d), done: (answers[d] || []).length >= QUIZ[d].length });
+      for (let d = 1; d <= 24; d++) days.push({ d, open: isOpen(d), today: isToday(d), label: dayLabel(d), done: isOpen(d) && (answers[d] || []).length >= QUIZ[d].length });
       return { ...base, screen: "grid", days };
     }
     if (view.screen === "locked") return { ...base, screen: "locked", d: view.d, title: title(view.d) };
