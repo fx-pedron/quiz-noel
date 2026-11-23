@@ -43,7 +43,6 @@ function startTv() {
       <div><button type="button" class="conn" id="conn"><span class="led"></span><span id="conn-t">Connecter le téléphone</span></button></div>
     </header>
     <div class="grid" id="grid" aria-label="Les 24 jours du quiz"></div>
-    <footer>Chaque jour se débloque à sa date. Pas de triche.</footer>
   </div>
   <div class="stage" id="stage" role="dialog" aria-modal="true" aria-labelledby="stage-title"><div class="stage-in" id="stage-in"></div></div>
   <div class="qr-panel" id="qrp" role="dialog" aria-modal="true" aria-labelledby="qr-title">
