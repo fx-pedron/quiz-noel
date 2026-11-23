@@ -38,7 +38,7 @@ function startTv() {
     <header>
       <p class="eyebrow">Décembre 2026</p>
       <h1>Le grand quiz de l'Avent</h1>
-      <p class="intro">Cinq questions par jour sur la France, de Redon à Marseille, et une grande finale de 24 questions sur Noël le 24. Une bonne réponse, un bonbon. Je compte les points.</p>
+      <p class="intro">Près de quinze ans en France : l'heure du grand examen a sonné. Chaque jour apporte son lot de questions, à toi d'y répondre si tu veux ta récompense. De Redon à Marseille, voyageons partout en France (et ailleurs, dans certaines circonstances…), sous l'œil d'un jury impartial. Presque.</p>
       <div class="scorebar" id="scorebar"></div>
       <div><button type="button" class="conn" id="conn"><span class="led"></span><span id="conn-t">Connecter le téléphone</span></button></div>
     </header>
